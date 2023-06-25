@@ -1,24 +1,16 @@
 <script setup>
 import {ref} from 'vue'
-const button_contents = ref([["C", "+/-", "%", "/"], [7, 8, 9, "x"], [4, 5, 6, "-"], [1, 2, 3, "+"], [0, ".", "~", "="]])
+
+const props = defineProps({
+  btn_list: Array
+})
 
 </script>
 
 <template>
-  <div class="btn-row">
-    <button class="calc-btn" v-for="elem in button_contents[0]">{{elem}}</button>
-  </div>
-  <div class="btn-row">
-    <button class="calc-btn" v-for="elem in button_contents[1]">{{elem}}</button>
-  </div>
-  <div class="btn-row">
-    <button class="calc-btn" v-for="elem in button_contents[2]">{{elem}}</button>
-  </div>
-  <div class="btn-row">
-    <button class="calc-btn" v-for="elem in button_contents[3]">{{elem}}</button>
-  </div>
-  <div class="btn-row">
-    <button class="calc-btn" v-for="elem in button_contents[4]">{{elem}}</button>
+  <!-- loop using passed prop btn_list -->
+  <div class="btn-row" v-for="row in btn_list">
+    <button class="calc-btn" v-for="elem in row">{{ elem }}</button>
   </div>
 </template>
 
