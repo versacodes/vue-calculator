@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue'
+import { ref, nanoid } from 'vue'
 
 const props = defineProps({
   btn_list: Array
@@ -8,9 +8,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <!-- loop using passed prop btn_list -->
-  <div class="btn-row" v-for="row in btn_list">
-    <button class="calc-btn" v-for="elem in row">{{ elem }}</button>
+  <!-- nested loop using passed prop btn_list -->
+  <!-- no id, instead used nanoid() library -->
+  <div class="btn-row" v-for="row in btn_list" :key="nanoid()">
+    <button class="calc-btn" v-for="elem in row" :key="nanoid()">{{ elem }}</button>
   </div>
 </template>
 
