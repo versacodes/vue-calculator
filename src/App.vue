@@ -1,14 +1,17 @@
 <script setup>
-  import HelloWorld from './components/HelloWorld.vue'
-
+  import CalculatorRow from './components/CalculatorRow.vue';
 </script>
 
 <template>
-  
+  <CalculatorRow />
 </template>
 
 <style scoped>
 
-
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 </style>
