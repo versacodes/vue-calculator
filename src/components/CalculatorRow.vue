@@ -1,17 +1,29 @@
 <script setup>
-import { ref, nanoid } from 'vue'
+import { ref } from 'vue'
+import { nanoid } from 'nanoid' 
 
 const props = defineProps({
   btn_list: Array
 })
+
+// classCount() to add another class to .btn-row based on index(row#)
+function classCount(number) {
+  return "btn-row-" + number.toString()
+}
+
+// same as classCount but for .calc-btn
+function btnCount(number) {
+  return "calc-btn-" + number.toString()
+}
 
 </script>
 
 <template>
   <!-- nested loop using passed prop btn_list -->
   <!-- no id, instead used nanoid() library -->
-  <div class="btn-row" v-for="row in btn_list" :key="nanoid()">
-    <button class="calc-btn" v-for="elem in row" :key="nanoid()">{{ elem }}</button>
+  <div class="btn-row" v-for="(row, index) in btn_list" :key="nanoid()" :class="classCount(index)">
+    <!-- for styling, use target .btn-row-theRowNumber > .calc-btn-theNumber -->
+    <button class="calc-btn" v-for="(elem, index) in row" :key="nanoid()" :class="btnCount(index)">{{ elem }}</button>
   </div>
 </template>
 
