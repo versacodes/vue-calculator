@@ -54,11 +54,11 @@ function btnCount(number) {
 
 .calc-btn {
   background: #555;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
 }
 
