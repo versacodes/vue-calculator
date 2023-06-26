@@ -3,8 +3,11 @@ import { ref } from 'vue'
 import { nanoid } from 'nanoid' 
 
 const props = defineProps({
-  btn_list: Array
+  btn_list: Array,
+  display_txt: Function
 })
+
+// console.log(props.display_txt)
 
 // classCount() to add another class to .btn-row based on index(row#)
 function classCount(number) {
@@ -16,6 +19,7 @@ function btnCount(number) {
   return "calc-btn-" + number.toString()
 }
 
+
 </script>
 
 <template>
@@ -23,7 +27,7 @@ function btnCount(number) {
   <!-- no id, instead used nanoid() library -->
   <div class="btn-row" v-for="(row, index) in btn_list" :key="nanoid()" :class="classCount(index)">
     <!-- for styling, use target .btn-row-theRowNumber > .calc-btn-theNumber -->
-    <button class="calc-btn" v-for="(elem, index) in row" :key="nanoid()" :class="btnCount(index)">{{ elem }}</button>
+    <button type="button" class="calc-btn" v-for="(elem, index) in row" :key="nanoid()" :class="btnCount(index)" @click="display_txt">{{ elem }}</button>
   </div>
 </template>
 
@@ -60,6 +64,7 @@ function btnCount(number) {
   display: inline-block;
   font-size: 14px;
   text-align: center;
+  font-weight: bold;
 }
 
 .calc-btn:hover {
