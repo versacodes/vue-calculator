@@ -6,29 +6,49 @@ import CalculatorDisplay from './components/CalculatorDisplay.vue';
 const btn_content = ref([["C", "+/-", "%", "/"], [7, 8, 9, "x"], [4, 5, 6, "-"], [1, 2, 3, "+"], [0, ".", "="]])
 
 
-const currentInput = ref("")
+const currentInput = ref("0") // default should be string
 const secondInput = ref("") // secondInput is previous input
 const answer = ref("")
 const operator = ref("")
 
 function displayText(e) {
-  
+
+  // string is expected
+  // .textContent is a string
   let value = e.target.textContent
   let operatorList = ['+', '-', 'x', '/']
 
+  if(currentInput.value === "0") {
+    currentInput.value = ""
+  }
+
   // reset button
   if(value === 'C') {
-    currentInput.value = ''
+    currentInput.value = "0"
+    secondInput.value = ""
     answer.value = ''
+  }
+
+  // turn currentInput into a percentage(decimal)
+  if(value === '%') {
+    currentInput.value = currentInput.value / 100
+  }
+
+  if(value === '+/-') {
+    // console.log(typeof currentInput.value)
+    currentInput.value > 0
+    ? currentInput.value = (currentInput.value*-1).toString()
+    : currentInput.value = Math.abs(currentInput.value).toString()
   }
 
   // max numbers to display is 9
   currentInput.value.length < 9
-  && !isNaN(Number(value))
+  && !isNaN(Number(value)) // true if value is a number
   ? currentInput.value = currentInput.value + value
   : null
   
   // no '.' yet then run ternary condition
+  // concat '.' in currentInput
   !currentInput.value.toString().includes('.') && value === '.' ? currentInput.value = currentInput.value + value : null
 
   // check if value is in operatorList then set currentInput to ''
